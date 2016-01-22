@@ -1,0 +1,81 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Test</title>
+		<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="js/bundle.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/utils/Draggable.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
+	</head>
+	<body>
+		<svg id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36px" height="36px" viewBox="0 0 120 120"><g> <path  d="M23.996,118.018c-0.008-0.014-0.018-0.023-0.027-0.033c-0.009,0.01-0.017,0.02-0.027,0.033H23.996z"/> <path id="k" d="M72.461,102.092c-3.209,0-3.609-4.404-4.01-6.814c-1.468-10.02-5.074-19.907-12.832-26.724l9.758-6.809 c0.938-0.67,2.14-1.741,2.14-2.942c0-2.406-3.078-6.817-12.018-13.899c-6.957,6.021-14.04,11.362-21.52,16.298V39.966 C33.979,30.348,35.717,23,46.137,23h2.941v-2.027h-2.883c-22.207,0-32.215,7.426-32.215,17.382V38.34 c-1.659-5.876-4.476-10.149-6.857-12.001l-1.464,1.469c3.606,2.803,8.274,13.496,8.274,22.175v46.369 c0,5.336-0.926,7.879-6.811,7.744v1.598c7.017,2.123,12.46,6.613,16.846,12.291c4.387-5.678,9.83-10.168,16.844-12.291v-1.598 c-5.882,0.135-6.81-2.408-6.81-7.744l-0.023-3.391v-9.707l5.745-3.604c5.617,5.608,8.016,12.959,8.688,20.702 c0.666,8.018,1.729,13.5,9.083,17.773c6.412-5.473,12.694-11.092,19.373-16.164l-0.669-1.336 C75,101.289,73.532,102.092,72.461,102.092z M33.979,81.119V63.482c1.077-0.935,5.212-3.746,6.552-3.746 c3.604,0,8.547,6.95,10.281,10.019L33.979,81.119z"/></g> <g class="rotate"><polygon id="star" points="114.34,18.892 96.942,18.203 90.913,1.875 84.877,18.203 67.487,18.892 81.154,29.684 76.429,46.433 90.913,36.769 105.392,46.433 100.673,29.684"/></g> <rect fill="none" width="120" height="120"/> </svg>
+
+
+
+		<div id="scrollContainer" class="customblock" style="height:50%; width:50;">
+			<div id="scroller" style="overflow: auto; cursor: move; touch-action: none; -webkit-user-select: none;"><div style="display: block; width: 100%; padding-right: 118px; position: relative; overflow: visible; vertical-align: top; z-index: 0; transform: translate3d(0px, 0px, 0px);">
+				<h2 style="margin-top:0">Drag me to scroll me</h2>
+				<p>Click and drag this content and then let go as you're dragging to throw it. Notice how it smoothly glides
+				   to a rest, respecting the initial velocity and even permitting overscolling with bounce-back without forcing
+				   fake/simulated scrollbars. It's actually using the <code>scrollTop</code> or <code>scrollLeft</code> of the container, and then if/when
+				   it exceeds the bounds, it'll apply a <code>translate3d()</code> transform for hardware-accelerated performance, and it'll
+				   even fall back to using padding when 3D transforms aren't available. Yes, it even works in IE8!</p>
+
+				<h2>How does it work?</h2>
+
+				<p>When you create the Draggable with <code>type:"scroll"</code> (or <code>"scrollTop"</code> or <code>"scrollLeft"</code>), it will create a
+					<code>&lt;div&gt;</code> and wrap it around the native content of the target element so that it can move things appropriately.
+				   So that wrapper div ends up being the only child of the element. Then, as you drag, it updates the <code>scrollTop</code>/<code>scrollLeft</code>
+				   of the element until you exceed the bounds at which time it'll either add a <code>translate3d()</code> CSS transform
+				   (if supported) to that wrapper <code>&lt;div&gt;</code> or fall back to using padding for older browsers.</p>
+
+				<p>This gives you the best of both worlds - it delivers <strong>native</strong> scrolling with normal
+				   scrollbar UI that's built into the OS/browser, plus outstanding performance on mobile devices due to the
+					<code>translate3d()</code> sweetness on overscroll, and compatibility even with IE8, all in a 3.4k gzipped footprint
+				   (not including TweenLite or CSSPlugin which are required).</p>
+
+				<p>Oh, and don't forget the kinetic-based flick scrolling that's enabled when you load ThrowPropsPlugin and
+				   set <code>throwProps:true</code> in the config object. When you drag past the normal scrolling limits, the <code>edgeResistance</code>
+				   kicks in (you control how much). It just "feels" natural and fluid, much more so than most other options out there.</p>
+
+				<p>Did we mention Draggable works great with touch events too? And if the user flick-scrolls and then
+				   while it's animating, they use their mouse wheel or grab the scrollbar to take control themselves,
+				   Draggable automatically releases control and stops the animation. Don't worry your pretty little head.</p>
+
+				<h2>Usage</h2>
+
+				<p>Setup is a breeze. One line is all you need:</p>
+
+				<pre class="prettyprint lang-js prettyprinted" style="overflow-x: auto;"><span class="typ">Draggable</span><span class="pun">.</span><span class="pln">create</span><span class="pun">(</span><span class="str">"#container"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">type</span><span class="pun">:</span><span class="str">"scroll"</span><span class="pun">,</span><span class="pln"> throwProps</span><span class="pun">:</span><span class="kwd">true</span><span class="pun">,</span><span class="pln"> edgeResistance</span><span class="pun">:</span><span class="lit">0.35</span><span class="pun">});</span></pre>
+
+				<p><strong>That's it!</strong></p>
+
+				<p>Of course you can tweak the configuration however you please. Want to only scroll vertically?
+				   Use <code>type:"scrollTop"</code>. Or for horizontal scrolling, use <code>type:"scrollLeft"</code>. When you use simply
+					<code>type:"scroll"</code>, it allows scrolling in either direction.</p>
+
+				<p>Change the <code>edgeResistance</code> to 1 if you don't want the user to be able to drag past the edge.</p>
+
+				<p>Note that ThrowPropsPlugin is a membership benefit of <a href="http://www.greensock.com/club/">Club GreenSock</a>
+				   ("Shockingly Green" and "Business Green" levels), but the Draggable works fine without that - you
+				   just won't get the kinetic-based motion. You can still drag things.</p>
+
+				<h2>Not just for scrolling</h2>
+				<p>As you can see from the examples above, Draggable is multi-talented. Change the <code>type</code> to <code>"x,y"</code> to make
+				   the entire object draggable around the screen (literally moving it, not scrolling). Or <code>type:"top,left"</code> does the same thing,
+				   but uses the <code>"top"</code> and <code>"left"</code> css properties instead of <code>translateX()</code> and <code>translateY()</code> CSS transforms.
+				   Or if you want to be able to drag-spin an object, use <code>type:"rotation"</code>. In fact, it'll even honor the
+				   <code>transform-origin</code> of the element. </p>
+			</div></div>​
+		</div>
+
+		<script type="text/javascript">
+			TweenMax.to ("#logo", 1, {x: 100});
+			$("#star").css('visibility', 'hidden');
+			$("#star").css('visibility', 'hidden');
+			TweenLite.to("#k", 1, {morphSVG:"#star"});
+			Draggable.create("#scroller", {type:"scroll", edgeResistance:0.5, throwProps:true});
+		</script>
+	</body>
+</html>
